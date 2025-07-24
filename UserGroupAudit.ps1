@@ -1,6 +1,6 @@
 ﻿# Define the target user and group
-$userToCheck = "jwalz"
-$groupToCheck = "LUCAS_SFTP"
+$userToCheck = "userName"
+$groupToCheck = "GroupName"
 
 # Function to log output to the console
 function Log-Output {
