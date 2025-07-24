@@ -1,0 +1,1 @@
+﻿gam redirect csv ./files.csv user charles.lewis@streamlinehealthcare.com print filelist fields id,title,permissions,owners.emailaddress todrive

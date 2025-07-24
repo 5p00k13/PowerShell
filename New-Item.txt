@@ -1,0 +1,3 @@
+This is how we make a new file.
+
+New-Item -path \\Lewis-Nas\Storage\Scripts\New-Item.txt -type "file" -Value "This is how we make a new file."

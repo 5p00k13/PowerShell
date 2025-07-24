@@ -1,0 +1,15 @@
+Remove-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\FVE" -Recurse -Force
+gpupdate /force
+Restart-Computer
+
+**Check and Sync**
+Start-Process "ms-settings:workplace"
+
+**Start Bitlocker**
+manage-bde -on C:
+
+**Check to make sure GPO reg is gone**
+reg query HKLM\SOFTWARE\Policies\Microsoft\FVE
+
+**Check Azureadjoined and Domain joined**
+dsregcmd /status

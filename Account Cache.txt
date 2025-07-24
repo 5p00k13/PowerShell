@@ -1,0 +1,1 @@
+Runas.exe /user:scnet\USERNAME cmd.exe

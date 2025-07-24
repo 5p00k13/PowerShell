@@ -1,0 +1,7 @@
+On AUM:  status VM running and VM starting
+ Tags: AUM Tag: Production
+
+Set reboot to always after you click one time upgrade at the top.
+Leave maintenance windows set to default.
+
+*** Leave pssprweb01 off the list ***

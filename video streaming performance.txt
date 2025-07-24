@@ -1,0 +1,73 @@
+1. Check Network Bandwidth and Speed
+Test Internet Speed: While PowerShell doesn't have a built-in command for speed tests, you can use a third-party module like Speedtest.net to check your internet speed.
+
+** Install-Module -Name Speedtest.Net -Force; Import-Module Speedtest.Net; Start-Speedtest
+
+This will give you the download and upload speeds, which are crucial for streaming performance.
+
+2. Check for Packet Loss
+Ping Test: You can use the Test-Connection cmdlet to check for packet loss to a specific server or website.
+
+** Test-Connection -ComputerName google.com -Count 100 -ErrorAction SilentlyContinue | Select-Object Address, ResponseTime, StatusCode
+
+If you notice high packet loss or latency, it may indicate a network issue.
+
+3. Check Wi-Fi Signal Strength
+Wi-Fi Signal Quality: If you're using a Wi-Fi connection, you can check the signal quality with the following command:
+
+** netsh wlan show interfaces
+
+Look for the Signal value, which indicates the Wi-Fi signal strength. A low percentage may suggest weak signal strength, which can affect streaming.
+
+4. Check Network Adapter Performance
+Network Adapter Status: You can view detailed information about your network adapter to check for errors or issues.
+
+** Get-NetAdapter | Get-NetAdapterStatistics
+
+This will show you packet statistics, which can help identify if your adapter is dropping packets or experiencing other issues.
+
+5. Check System Resource Usage
+CPU and Memory Usage: High CPU or memory usage can affect streaming performance. You can monitor these resources with:
+
+** Get-Process | Sort-Object -Descending CPU | Select-Object -First 10 Name, CPU; Get-Process | Sort-Object -Descending WorkingSet | Select-Object -First 10 Name, WorkingSet
+
+This will display the top processes consuming CPU and memory.
+
+6. Check for Background Processes
+List Running Processes: To see what processes are running that could be affecting performance:
+
+** Get-Process | Sort-Object -Property CPU -Descending | Select-Object -First 10
+
+Terminating unnecessary processes might improve streaming performance.
+
+7. Check DNS Configuration
+View DNS Settings: Incorrect DNS settings can slow down streaming. You can view your current DNS settings with:
+
+** Get-DnsClientServerAddress
+
+If you need to change your DNS servers, you can do so using the Set-DnsClientServerAddress cmdlet.
+
+8. Check for Network Congestion
+Monitor Network Traffic: Use PowerShell to monitor network traffic and identify if other devices or processes are using significant bandwidth:
+
+** Get-NetAdapterStatistics
+
+This will give you an overview of the bytes sent and received by your network adapters.
+
+9. Check Browser Cache and Cookies
+Clear Browser Cache and Cookies: While PowerShell doesn't directly manage browser caches, you can create scripts that clear temporary files or use a tool like Clear-DnsClientCache to flush DNS:
+
+** Clear-DnsClientCache
+
+View DNS Cache Entries:
+
+Run the following command to see all the current DNS cache entries:
+
+** ipconfig /displaydns
+
+Count DNS Cache Entries:
+
+To count the number of DNS cache entries, you can use PowerShell to process the output of ipconfig /displaydns:
+
+
+** (ipconfig /displaydns | Select-String -Pattern "Record Name").Count

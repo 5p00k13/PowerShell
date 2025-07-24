@@ -1,0 +1,3 @@
+nltest /sc_query:smartcarenet.com   =Check DC controller
+
+nltest /Server:ClientComputerName/SC_RESET:DomainName\DomainControllerName   =Set domain controller temp

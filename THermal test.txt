@@ -1,0 +1,14 @@
+Download and Extract open hardware monitor!
+
+$downloadUrl="https://openhardwaremonitor.org/files/openhardwaremonitor-v0.9.6.zip"; $downloadPath="C:\Temp\OpenHardwareMonitor.zip"; $extractPath="C:\Temp\ohm"; $executablePath="$extractPath\OpenHardwareMonitor.exe"; try { Invoke-WebRequest -Uri $downloadUrl -OutFile $downloadPath -ErrorAction Stop; if (Test-Path $extractPath) { Remove-Item -Path $extractPath -Recurse -Force -ErrorAction Stop }; Add-Type -AssemblyName "System.IO.Compression.FileSystem"; [System.IO.Compression.ZipFile]::ExtractToDirectory($downloadPath, $extractPath); $timeout=60; $startTime=Get-Date; while (-Not (Test-Path $executablePath) -and ((Get-Date) - $startTime).TotalSeconds -lt $timeout) { Start-Sleep -Seconds 2 }; if (-Not (Test-Path $executablePath)) { Write-Host "Extraction failed or executable not found."; exit }; Write-Host "Download and extraction completed successfully."; Start-Process -FilePath $executablePath -NoNewWindow -PassThru; Start-Sleep -Seconds 10 } catch { Write-Host "An error occurred: $_" }
+
+
+Open hardware monitor and stress test!
+
+Start-Process -FilePath "C:\Temp\ohm\OpenHardwareMonitor\OpenHardwareMonitor.exe" -NoNewWindow -PassThru; Start-Sleep -Seconds 10; $sw=[System.Diagnostics.Stopwatch]::StartNew(); $jobs=@(); 1..[Environment]::ProcessorCount | ForEach-Object { $jobs += Start-Job -ScriptBlock { while ($true) { [math]::Sqrt(12345) > $null } } }; while ($sw.Elapsed.TotalSeconds -lt 60) { Start-Sleep -Seconds 1 }; $jobs | ForEach-Object { Stop-Job -Job $_ }; $sw.Stop(); Start-Sleep -Seconds 60; Write-Host "Closing OpenHardwareMonitor..."; Stop-Process -Name "OpenHardwareMonitor" -Force -ErrorAction SilentlyContinue
+
+
+Remove hardware monitor!
+
+if (Test-Path "C:\Temp\ohm") { Remove-Item -Path "C:\Temp\ohm" -Recurse -Force }; if (Test-Path "C:\Temp\OpenHardwareMonitor.zip") { Remove-Item -Path "C:\Temp\OpenHardwareMonitor.zip" -Force }
+

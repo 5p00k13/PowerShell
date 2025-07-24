@@ -1,0 +1,19 @@
+function get-apps {
+    return @(Get-ItemProperty HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\*; Get-ItemProperty HKLM:\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\*)
+}
+
+$AppNames = @("HP Wolf Security", "HP Wolf Security - Console", "HP Security Update Service")
+
+foreach ($AppName in $AppNames) {
+    $Apps = get-apps | Where-Object displayname -like "*$AppName*" | Where-Object UninstallString -like 'msiexec.exe*'
+    $Guids = ($Apps.UninstallString -replace 'msiexec.exe /\w', '').trim()
+    $Guids | ForEach-Object {
+        Start-Process "C:\Windows\System32\msiexec.exe" -ArgumentList "/x $_ /qn /norestart" -Wait
+    }
+}
+
+# Additional WMIC commands for uninstallation
+foreach ($AppName in $AppNames) {
+    $wmicCommand = "wmic product where name='$AppName' call uninstall"
+    Invoke-Expression $wmicCommand
+}

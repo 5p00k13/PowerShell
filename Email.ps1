@@ -1,0 +1,48 @@
+﻿function Connect-Exchange {
+    Connect-ExchangeOnline -UserPrincipalName "your-admin-email@domain.com" -UseWindowsPowerShell
+    if ($?) {
+        Write-Host "Connected to Exchange Online."
+    } else {
+        Write-Host "Failed to connect to Exchange Online."
+        exit
+    }
+}
+
+function Start-ManagedFolderAssistant {
+    param (
+        [string]$Identity
+    )
+    Start-ManagedFolderAssistant -Identity $Identity
+    if ($?) {
+        Write-Host "Managed Folder Assistant started for $Identity."
+    } else {
+        Write-Host "Failed to start Managed Folder Assistant for $Identity."
+    }
+}
+
+function Main {
+    Connect-Exchange
+
+    while ($true) {
+        $email = Read-Host "Enter an email address (or type 'exit' to quit)"
+        if ($email -eq 'exit') {
+            break
+        }
+
+        Start-ManagedFolderAssistant -Identity $email
+
+        # Verify connection
+        $connectionStatus = Get-ConnectionInformation
+        if ($connectionStatus.Connected) {
+            Write-Host "Still connected to Exchange Online."
+        } else {
+            Write-Host "Lost connection to Exchange Online."
+            break
+        }
+    }
+
+    # Pause to keep the window open
+    Read-Host "Press Enter to exit"
+}
+
+Main

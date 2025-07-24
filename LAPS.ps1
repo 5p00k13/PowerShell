@@ -1,0 +1,1 @@
+﻿Get-ADComputer -filter "name -like 'minint-9b8*'" -Properties ms-mcs-admpwd

@@ -1,0 +1,1 @@
+﻿Get-ADUser -Filter "Enabled -eq 'False'" -Properties userAccountControl,whenChanged,lastLogonTimestamp | Select-Object Name, SamAccountName, @{Name='DisabledDate';Expression={if($_.userAccountControl -band 2) {[datetime]::FromFileTime($_.whenChanged)} else {'Not Disabled'}}}, @{Name='LastModified';Expression={[datetime]::FromFileTime($_.lastLogonTimestamp)}}

@@ -1,0 +1,15 @@
+FIND
+
+Get-WmiObject -Query "SELECT * FROM Win32_Product WHERE Name LIKE '%Office%'" | Select-Object Name, Version
+
+
+
+
+REMOVE
+
+$officeProduct = Get-WmiObject -Query "SELECT * FROM Win32_Product WHERE Name = 'Office 16 Click-to-Run Extensibility Component'"
+if ($officeProduct) {
+    $officeProduct.Uninstall()
+} else {
+    Write-Output "Product not found."
+}

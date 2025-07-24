@@ -1,0 +1,4 @@
+
+#Last boot time
+
+(systeminfo | Select-String "System Boot Time").ToString().Trim()

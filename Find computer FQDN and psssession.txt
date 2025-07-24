@@ -1,0 +1,23 @@
+# Step 1: Prompt for the partial computer name
+$PartialComputerName = Read-Host -Prompt "Enter the partial computer name"
+
+# Step 2: Search Active Directory for the full computer name and FQDN
+$Computer = Get-ADComputer -Filter "Name -like '*$PartialComputerName*'" -Property Name, DNSHostName | Select-Object -First 1
+
+if ($Computer) {
+    $FullComputerName = $Computer.Name
+    $FQDN = $Computer.DNSHostName
+    Write-Host "Found computer: $FullComputerName (FQDN: $FQDN)"
+    
+    # Step 3: Confirm the FQDN and ask if you want to proceed
+    $proceed = Read-Host -Prompt "Do you want to start a PowerShell session with $FQDN? (Y/N)"
+    
+    if ($proceed -eq 'Y') {
+        Write-Host "Starting PowerShell session with $FQDN..."
+        Enter-PSSession -ComputerName $FQDN
+    } else {
+        Write-Host "Operation canceled."
+    }
+} else {
+    Write-Host "No computers found matching the name '$PartialComputerName'. Please check the name and try again."
+}

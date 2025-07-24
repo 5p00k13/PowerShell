@@ -1,0 +1,1 @@
+ cscript.exe c:\windows\system32\slmgr.vbs /ipk 8JN4J-D8D9W-WH2R7-CGRWM-HT9TY /ato
