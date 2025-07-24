@@ -1,1 +1,1 @@
-Add-Computer -ComputerName $env:COMPUTERNAME -Server portagedc12.smartcarenet.com -DomainName smartcarenet.com -Credential (Get-Credential -UserName scnet\ad_clewis -Message EnterPassword)
+Add-Computer -ComputerName $env:COMPUTERNAME -Server p"DC NAME" -DomainName "DOMAIN NAME" -Credential (Get-Credential -UserName "username" -Message EnterPassword)
