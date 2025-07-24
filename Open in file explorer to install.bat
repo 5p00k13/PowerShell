@@ -1,1 +1,0 @@
-\\smartcarenet.com\netlogon\RemotePC-ConfigKey.msi
