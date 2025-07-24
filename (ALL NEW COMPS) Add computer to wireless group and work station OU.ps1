@@ -5,7 +5,7 @@ $adminCreds = Get-Credential -Message "Enter your administrative credentials"
 $computerName = Read-Host "Enter the computer name"
 
 # Identity of the group you want to add the computer to
-$groupIdentity = "SEC_StreamlineWirelessControl"
+$groupIdentity = "New_Group"
 
 # Get all OUs in the domain
 $allOUs = Get-ADOrganizationalUnit -Filter * | Select-Object DistinguishedName
