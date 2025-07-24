@@ -1,1 +1,1 @@
-﻿Copy-Item -Path 'C:\Users\clewis\Downloads\Testfile.txt' -Destination '\\ccheney-envy.smartcarenet.com\c$'
+﻿Copy-Item -Path 'source' -Destination 'target'
