@@ -2,10 +2,10 @@
 Import-Module ActiveDirectory | Out-Null
 
 # Specify the username
-$user = "jphillips"
+$user = "user"
 
 # Path to output file (ensure it is a file, not just a folder)
-$outputFile = "C:\Users\clewis\Desktop\Reports\DisabledAccountsLog.txt"
+$outputFile = "output locationt"
 
 # Ensure the output folder exists
 $outputFolder = Split-Path -Path $outputFile
