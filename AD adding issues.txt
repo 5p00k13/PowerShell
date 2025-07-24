@@ -1,0 +1,5 @@
+ping portagedc12.smartcarenet.com
+if good run "Test-ComputerSecureChannel -Server portagedc12.smartcarenet.com"
+If that returns true then we'll have to do some digging
+If it's false then run 
+Test-ComputerSecureChannel -Server portagedc12.smartcarenet.com -repair

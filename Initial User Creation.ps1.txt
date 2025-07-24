@@ -1,7 +1,7 @@
 #Initial User Creation
 Set-Alias -Name gam -Value "C:\GAMADV-XTD3\gam.exe"
 if (!$domainadmincreds) { $domainadmincreds = Get-Credential -Message "DomainAdmin creds" }
-$ImportCSV = import-csv C:\Users\clewis\Documents\Save\NewUserCreation.csv | Where-Object ignore -ne 'x'
+$ImportCSV = import-csv C:\temp\NewUserCreation.csv | Where-Object ignore -ne 'x'
 foreach ($csv in ($ImportCSV | where-object { $_.ignore -notmatch '\w' })) {
     
     #if first name has non-letter characters, remove them for the email but leave them so they can be used in the displayname. 
