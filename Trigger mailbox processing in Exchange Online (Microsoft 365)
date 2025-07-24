@@ -1,4 +1,18 @@
-﻿function Connect-Exchange {
+#Trigger mailbox processing in Exchange Online (Microsoft 365)
+#Specifically, it:
+
+#Connects to Exchange Online using PowerShell.
+
+#Prompts the admin to enter an email address.
+
+#Runs the Managed Folder Assistant (MFA) for that mailbox.
+
+#Continues prompting until the admin types
+ 
+ 
+ 
+ 
+ function Connect-Exchange {
     Connect-ExchangeOnline -UserPrincipalName "your-admin-email@domain.com" -UseWindowsPowerShell
     if ($?) {
         Write-Host "Connected to Exchange Online."
